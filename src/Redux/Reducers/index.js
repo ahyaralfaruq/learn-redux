@@ -4,8 +4,8 @@ import {combineReducers} from 'redux'
 import {cardReducer,selectedCardReducer} from './CardReducer'
 
 const reducers = combineReducers({
-    all_products : cardReducer,
-    selected_product : selectedCardReducer,
+    cards : cardReducer,
+    selected_card : selectedCardReducer,
 })
 
 export default reducers
