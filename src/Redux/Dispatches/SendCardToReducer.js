@@ -1,6 +1,6 @@
 // 2. membuat dispatch untuk menampung data yang dikirim user untuk dikirim lagi ke reducer.
 
-import {ActionTypes} from '../constants/ActionTypes'
+import {ActionTypes} from '../Constants/ActionTypes'
 
 export const setCard = (cards) => {
     return {
