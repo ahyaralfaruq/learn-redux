@@ -4,7 +4,7 @@
 import {ActionTypes} from '../Constants/ActionTypes'
 
 const initialState = {
-    cards : {}
+    cards : [],
 }
 
 export const cardReducer = (state = initialState, {type, payload}) => {

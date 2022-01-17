@@ -4,7 +4,7 @@ import {combineReducers} from 'redux'
 import {cardReducer,selectedCardReducer} from './CardReducer'
 
 const reducers = combineReducers({
-    cards : cardReducer,
+    cardState : cardReducer,
     selected_card : selectedCardReducer,
 })
 

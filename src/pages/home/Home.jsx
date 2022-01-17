@@ -9,13 +9,11 @@ import './style.css'
 
 const Home = () => {
 
-    const getDataCards = useSelector(state => state.cards.cards)
+    const getDataCards = useSelector(state => state.cardState.cards)
     const dispatch = useDispatch()
     
     const fetchCard = async () => {
-        const response = await axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php").catch(err => {
-            console.log(err)
-        })
+        const response = await axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php")
         dispatch(setCard(response.data.data))
     }
 
@@ -23,24 +21,19 @@ const Home = () => {
         fetchCard()
     },[])
 
+    const loadingData = () => {
+        return <div style={{display:"flex",alignItems:"center",JustifyContent:"center"}}>Loading...</div>
+    }
+
     return (
         <>
             <Navbar />
             <section className="content">
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
+                {
+                    getDataCards !== 0 ? getDataCards.map(card => {
+                        return <Card key={card.id} kirimDataCard={card} />
+                    }) : loadingData
+                } 
             </section>
         </>
     )
