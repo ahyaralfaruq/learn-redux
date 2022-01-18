@@ -1,0 +1,14 @@
+.ul-wrapper {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    
+}
+.li-kotak {
+    padding: 5px;
+}
+.link-by {
+    color: rgba(49, 53, 59, .96);
+    text-decoration: none;
+    display: block;
+}
