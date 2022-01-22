@@ -10,32 +10,37 @@ import './style.css'
 const Cards = () => {
 
     // pagination
-    // const [data, setData] = useState([])
-    // const [loading, setLoading] = useState(false)
-    const [halSaatIni, setHalSaatIni] =  useState(1)
-    const [dataPerHal,setDataPerHal] = useState(100)
+    // const [data, setData] = useState([]) ==> udah diganti dengan redux dispatch
+    const [offset, setOffset] =  useState(0)
+    const [loading, setLoading] = useState(false)
+    const [pageCount, setPageCount] =  useState(0)
+    const [perHal,setPerHal] = useState(100)
 
     const getDataCards = useSelector(state => state.cardState.cards)
     const dispatch = useDispatch()
     
     const fetchCard = async () => {
-        // setLoading(true)
+        setLoading(true)
         const response = await axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php")
-        // setData(response.data.data)
         dispatch(setCard(response.data.data))
-        // setLoading(false)
+
+        const datas = response.data.data
+        setPageCount(Math.ceil(datas.length / perHal))
+        setLoading(false)
+
     }
 
     useEffect(() => {
         fetchCard()
     },[])
 
-    // rumus halaman saat ini
-    const indexOfLastData = halSaatIni * dataPerHal
-    const indexOfFirstData = indexOfLastData - dataPerHal
-    const halamanSekarang = getDataCards.slice(indexOfFirstData, indexOfLastData)
-
-    const cekHalNow = (noHalaman) => setHalSaatIni(noHalaman)
+    const currentItems = getDataCards.slice(offset, offset + perHal)
+    
+    const handlePageClick = (event) => {
+        const newOffset = (event.selected * perHal) % getDataCards.length;
+        console.log(`User requested page number ${event.selected}, which is offset ${newOffset}`);
+        setOffset(newOffset);
+    };
 
     
     const loadingData = () => {
@@ -46,12 +51,12 @@ const Cards = () => {
         <>
             <section className="content">
                 {
-                    halamanSekarang === 0 ? loadingData : halamanSekarang.map(card => {
+                    loading ? loadingData : currentItems.map(card => {
                         return <Card key={card.id} kirimDataCard={card} />
                     })
                 }
             </section>
-            <Pagination dataPerHal={dataPerHal} totalHal={getDataCards.length} paginate={cekHalNow} currentPage={halSaatIni} />
+            <Pagination paginate={handlePageClick} pageCount={pageCount} />
         </>
     )
 }

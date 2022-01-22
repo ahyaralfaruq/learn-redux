@@ -1,14 +1,34 @@
-.ul-wrapper {
-    list-style: none;
+.paginator {
     display: flex;
     align-items: center;
-    
+    justify-content: center;
+    margin-top: 30px;
 }
-.li-kotak {
-    padding: 5px;
+.pagination-wrapper {
+    margin: 15px auto;
+    display: flex;
+    list-style: none;
+    outline: none;
 }
-.link-by {
-    color: rgba(49, 53, 59, .96);
-    text-decoration: none;
-    display: block;
+.pagination-wrapper > .active > a{
+    background-color: #47ccde ;
+    border-color: #47ccde ;
+    color: #fff;
+}
+.pagination-wrapper > li > a{
+    border: 1px solid #47ccde ;
+    padding: 5px 10px;
+    outline: none;
+    cursor: pointer;
+}
+.pagination-wrapper > .active > a, .pagination-wrapper > .active > span, .pagination-wrapper > .active > a:hover, .pagination-wrapper > .active > span:hover, .pagination-wrapper > .active > a:focus, .pagination-wrapper > .active > span:focus{
+    background-color: #47ccde ;
+    border-color: #47ccde;
+    outline: none ;
+}
+.pagination-wrapper > li > a, .pagination-wrapper > li > span{
+    color: #47ccde
+}
+.pagination-wrapper > li:first-child > a, .pagination-wrapper > li:first-child > span, .pagination-wrapper > li:last-child > a, .pagination-wrapper > li:last-child > span{
+    border-radius: unset
 }
