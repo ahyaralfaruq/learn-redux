@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactPaginate from 'react-paginate'
-import {Link} from 'react-router-dom'
 
 import './style.css'
 

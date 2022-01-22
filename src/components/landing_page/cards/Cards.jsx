@@ -13,8 +13,8 @@ const Cards = () => {
     // const [data, setData] = useState([]) ==> udah diganti dengan redux dispatch
     const [offset, setOffset] =  useState(0)
     const [loading, setLoading] = useState(false)
-    const [pageCount, setPageCount] =  useState(0)
-    const [perHal,setPerHal] = useState(100)
+    const [pageCount, setPageCount] =  useState(0) // jumlah halaman
+    const [perHal] = useState(100)
 
     const getDataCards = useSelector(state => state.cardState.cards)
     const dispatch = useDispatch()
@@ -37,9 +37,8 @@ const Cards = () => {
     const currentItems = getDataCards.slice(offset, offset + perHal)
     
     const handlePageClick = (event) => {
-        const newOffset = (event.selected * perHal) % getDataCards.length;
-        console.log(`User requested page number ${event.selected}, which is offset ${newOffset}`);
-        setOffset(newOffset);
+        const newOffset = (event.selected * perHal) % getDataCards.length
+        setOffset(newOffset)
     };
 
     
@@ -51,7 +50,10 @@ const Cards = () => {
         <>
             <section className="content">
                 {
-                    loading ? loadingData : currentItems.map(card => {
+                    // loading ? loadingData : currentItems.map(card => {
+                    //     return <Card key={card.id} kirimDataCard={card} />
+                    // })
+                    currentItems.map(card => {
                         return <Card key={card.id} kirimDataCard={card} />
                     })
                 }
