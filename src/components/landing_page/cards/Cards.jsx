@@ -4,6 +4,7 @@ import axios from 'axios'
 import {setCard} from '../../../Redux/Dispatches/SendCardToReducer'
 import Card from './card/Card'
 import Pagination from '../pagination/Pagination'
+import Loading from '../../Loading'
 
 import './style.css'
 
@@ -41,19 +42,11 @@ const Cards = () => {
         setOffset(newOffset)
     };
 
-    
-    const loadingData = () => {
-        return <div style={{display:"flex",alignItems:"center",JustifyContent:"center"}}>Loading...</div>
-    }
-
     return (
         <>
             <section className="content">
                 {
-                    // loading ? loadingData : currentItems.map(card => {
-                    //     return <Card key={card.id} kirimDataCard={card} />
-                    // })
-                    currentItems.map(card => {
+                    loading ? <Loading /> : currentItems.map(card => {
                         return <Card key={card.id} kirimDataCard={card} />
                     })
                 }
